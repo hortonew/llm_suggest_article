@@ -1,0 +1,8 @@
+.python-version
+articles_cache.pkl
+venv
+articles_ive_liked.txt
+bio.txt
+my_interests.txt
+__pycache__
+.DS_STORE

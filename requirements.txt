@@ -1,0 +1,9 @@
+bs4
+chromadb
+keyring
+langchain
+openai
+requests
+tiktoken
+unstructured
+unstructured[pdf] # if you want to use the UnstructuredPDFLoader
