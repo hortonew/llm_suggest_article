@@ -39,6 +39,5 @@ query = (
     "below 75%. "
     f"{articles}"
 )
-chat_history = []
-result = chain({"question": query, "chat_history": chat_history})
+result = chain({"question": query, "chat_history": []})
 print(result["answer"])
