@@ -4,6 +4,8 @@ What articles are worth reading, given what's relevant to me?
 
 ## Dependencies
 
+- Get your OpenAI API Key from https://platform.openai.com/account/api-keys
+
 ```sh
 python3.11 -m venv venv
 source venv/bin/activate
@@ -24,3 +26,7 @@ Suggest articles from Hacker News, based on my interests
 ```sh
 python suggest_hn_article.py
 ```
+
+## Tune
+
+Update data in `data/starter.txt`, or create your own files that describe you in the `data/` directory.
