@@ -48,7 +48,7 @@ def fetch_or_load_articles() -> list[str]:
 
     if is_cache_valid():
         with open(CACHE_PATH, 'rb') as f:
-            print("Loaded articles from cache since it hasn't been 30m")
+            print("Loaded articles from cache since it hasn't been 30m since the last pull.")
             articles = pickle.load(f)
     else:
         print("Reached out to HN for articles.")

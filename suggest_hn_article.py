@@ -18,7 +18,7 @@ os.environ["OPENAI_API_KEY"] = keyring.get_password("openai_api_key", "openai")
 dir_loader = DirectoryLoader("data/")
 loaders = [dir_loader]
 index = VectorstoreIndexCreator().from_loaders(loaders)
-print(f"Total documents loaded: {len(index.vectorstore.get()['documents'])}")
+print(f"Total documents with context loaded: {len(index.vectorstore.get()['documents'])}")
 chain = ConversationalRetrievalChain.from_llm(
     llm=ChatOpenAI(model="gpt-4"),
     retriever=index.vectorstore.as_retriever(
@@ -28,7 +28,7 @@ chain = ConversationalRetrievalChain.from_llm(
 
 print("Fetching articles")
 articles = fetch_or_load_articles()
-print(f"Current articles: {articles}\n\n")
+print(f"Total articles from HN loaded: {len(articles)}\n\n")
 
 query = (
     "Based on this list of hacker news articles and what you know about me, "
@@ -40,4 +40,5 @@ query = (
     f"{articles}"
 )
 result = chain({"question": query, "chat_history": []})
+print("Suggestions: ")
 print(result["answer"])
