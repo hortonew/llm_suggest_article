@@ -8,28 +8,32 @@ from langchain.chat_models import ChatOpenAI
 from langchain.document_loaders import DirectoryLoader
 from langchain.indexes import VectorstoreIndexCreator
 
-from articles import fetch_or_load_articles
+from hn_articles import fetch_or_load_articles
 
 warnings.simplefilter(action='ignore', category=UserWarning)
 
 # Store secret with: python -c  'import keyring; keyring.set_password("openai_api_key", "openai", "sk-...")'
 os.environ["OPENAI_API_KEY"] = keyring.get_password("openai_api_key", "openai")
 
+# Load context
 dir_loader = DirectoryLoader("data/")
 loaders = [dir_loader]
 index = VectorstoreIndexCreator().from_loaders(loaders)
-print(f"Total documents with context loaded: {len(index.vectorstore.get()['documents'])}")
+total_documents_with_context = len(index.vectorstore.get('documents', []))
+print(f"Total documents with context loaded: {total_documents_with_context}")
 chain = ConversationalRetrievalChain.from_llm(
     llm=ChatOpenAI(model="gpt-4"),
     retriever=index.vectorstore.as_retriever(
-        search_kwargs={"k": min(len(index.vectorstore.get()['documents']), 10)}
+        search_kwargs={"k": min(total_documents_with_context, 10)}
     ),
 )
 
+# Load articles to curate
 print("Fetching articles")
 articles = fetch_or_load_articles()
 print(f"Total articles from HN loaded: {len(articles)}\n\n")
 
+# Curate
 query = (
     "Based on this list of hacker news articles and what you know about me, "
     "which of these are the best articles to read based on my interests?  "

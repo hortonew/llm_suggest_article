@@ -5,7 +5,7 @@ import time
 import requests
 from bs4 import BeautifulSoup
 
-CACHE_PATH = "articles_cache.pkl"
+CACHE_PATH = "hn_articles_cache.pkl"
 CACHE_TIMEOUT = 1800  # 30 minutes
 PAGE_COUNT = 2 # how many HN pages to pull articles from
 

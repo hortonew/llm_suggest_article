@@ -1,5 +1,6 @@
 .python-version
 articles_cache.pkl
+hn_articles_cache.pkl
 venv
 articles_ive_liked.txt
 bio.txt

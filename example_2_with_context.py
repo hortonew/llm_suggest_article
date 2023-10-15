@@ -21,7 +21,7 @@ index = VectorstoreIndexCreator().from_loaders(loaders)
 chain = ConversationalRetrievalChain.from_llm(
     llm=ChatOpenAI(model="gpt-4"),
     retriever=index.vectorstore.as_retriever(
-        search_kwargs={"k": min(len(index.vectorstore.get()['documents']), 10)}
+        search_kwargs={"k": min(len(index.vectorstore.get('documents', [])), 10)}
     )
 )
 
